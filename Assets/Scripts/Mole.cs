@@ -73,6 +73,11 @@ public class Mole : MonoBehaviour
 
     void init()
     {
+        showMoleTimerLowerBound = 1.2f; //Mole needs to be visible for at least this much time
+        showMoleTimerUpperBound = 2.5f; //Mole will not be visible for more than this duration
+
+        hideMoleTimerLowerBound = 1f; //Mole needs to be hidden for at least this much time
+        hideMoleTimerUpperBound = 5f; //Mole will not be hidden for more than this duration
         changeStateTimer = (float)random.NextDouble() * hideMoleTimerUpperBound;
     }
 

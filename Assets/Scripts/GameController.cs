@@ -56,7 +56,6 @@ public class GameController : MonoBehaviour
 
         gameTimer = 60f;
         score = 0;
-        timer.text = "Timer: " + Mathf.Floor(gameTimer);
         scoreText.text = "Score: " + score;
     }
 }
