@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
 
 
     //Variables
-    public bool startGame = false;
+    public bool _startGame = false;
     public float gameTimer = 60f; //initial duration of timer
     public int score = 0;
 
@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (startGame)
+        if (_startGame)
         {
             if (gameTimer > 0f) //We check if the game is still running
             {
@@ -39,15 +39,24 @@ public class GameController : MonoBehaviour
                 gameTimer -= Time.deltaTime;
 
                 //Update Timer text
-                timer.text = "Timer: " + Mathf.Floor(gameTimer);
+                timer.text = "Timer: " + string.Format("{0:0.0}", gameTimer); ;
             }
 
             else
             {
                 timer.text = "GAME OVER";
-                gameTimer = 60f;
-                startGame = false;
+                _startGame = false;
             }
         }
+    }
+
+    public void startGame()
+    {
+        _startGame = true;
+
+        gameTimer = 60f;
+        score = 0;
+        timer.text = "Timer: " + Mathf.Floor(gameTimer);
+        scoreText.text = "Score: " + score;
     }
 }

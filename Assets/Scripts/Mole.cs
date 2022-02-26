@@ -20,6 +20,8 @@ public class Mole : MonoBehaviour
     private float hideMoleTimerLowerBound = 1f; //Mole needs to be hidden for at least this much time
     private float hideMoleTimerUpperBound = 5f; //Mole will not be hidden for more than this duration
 
+    private bool isGameRunning = false;
+
     static private Random random = new System.Random();
 
     void Start()
@@ -69,10 +71,21 @@ public class Mole : MonoBehaviour
         }
     }
 
+    void init()
+    {
+        changeStateTimer = (float)random.NextDouble() * hideMoleTimerUpperBound;
+    }
+
     public void Update()
     {
-        if (gameController.startGame)
+        if (gameController._startGame)
         {
+            if (!isGameRunning)
+            {
+                isGameRunning = true;
+                init();
+            }
+            
             changeStateTimer -= Time.deltaTime;
 
             if (changeStateTimer < 0f)
@@ -82,7 +95,8 @@ public class Mole : MonoBehaviour
         }
         else
         {
-            Hide();
+            if (isGameRunning) Hide();
+            isGameRunning = false;
         }
 
         transform.position = Vector3.MoveTowards(transform.position, newPosition, speed * Time.deltaTime);
